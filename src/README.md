@@ -4,7 +4,6 @@
 ## Overview
 
 The Paging Simulator is a Python-based tool designed to simulate virtual memory management using paging mechanisms. It allows users to explore the behavior of page tables under various configurations of address space size, page size, physical memory size, and percentage of page allocation. This tool is perfect for educational purposes and experiments in operating systems concepts.
-
 ---
 
 ## Features
@@ -15,7 +14,6 @@ The Paging Simulator is a Python-based tool designed to simulate virtual memory 
 - Simulates page faults for unallocated or invalid pages.
 
 ---
-
 ## Requirements
 
 - Python 3.6 or higher
@@ -44,9 +42,6 @@ python paging_simulator.py -p <PAGE_SIZE> -a <ADDRESS_SPACE> -P <PHYSICAL_MEMORY
 | `-s`, `--seed`       | Random seed for deterministic behavior (optional). |
 
 ---
-
-## Example Usage
-
 ### Example 1: Basic Simulation
 ```bash
 python paging_simulator.py -p 1024 -a 1048576 -P 524288
@@ -112,27 +107,109 @@ Page Table Size: 4096 bytes
 ```
 
 ---
+## Lab Tasks and Usage
 
-## Notes
+### Task 1: Page Table Size Analysis
+Run the simulator with varying address space sizes to analyze the size of the page table.
 
-- Ensure that the page size evenly divides the address space and physical memory.
-- Use the `-s` flag to test deterministic scenarios with a specific random seed.
-- Adjust `-u` to simulate scenarios with varying levels of page allocation.
+```bash
+python3 paging_simulator.py -p 1024 -a 1048576 -P 536870912 -v
+python3 paging_simulator.py -p 1024 -a 2097152 -P 536870912 -v
+python3 paging_simulator.py -p 1024 -a 4194304 -P 536870912 -v
+```
+
+### Task 2: Page Allocation Experiment
+Test with different percentages of allocated pages in the address space.
+
+```bash
+python3 paging_simulator.py -p 1024 -a 16384 -P 32768 -u 0 -v
+python3 paging_simulator.py -p 1024 -a 16384 -P 32768 -u 25 -v
+python3 paging_simulator.py -p 1024 -a 16384 -P 32768 -u 50 -v
+python3 paging_simulator.py -p 1024 -a 16384 -P 32768 -u 100 -v
+```
+
+### Task 3: Random Seed Experiment
+```bash
+python3 paging_simulator.py -p 8 -a 32 -P 1024 -v -s 1
+python3 paging_simulator.py -p 8192 -a 32768 -P 1048576 -v -s 2
+python3 paging_simulator.py -p 1048576 -a 268435456 -P 536870912 -v -s 3
+```
 
 ---
 
-## Outputs
+## Execute All Predefined Tasks
+```bash
+python3 paging_simulator.py --run-predefined
+```
+```bash
+python3 paging_simulator.py --run-predefined
 
-- **Page Table**: Displays the allocated frames for pages.
-- **Page Table Size**: Total size of the page table in bytes.
-- **Address Translations**: Simulates random virtual address translations and outputs results (physical address or page fault).
+=== Task 1: Page Table Size Analysis ===
+
+Configuration: {'page_size': 1024, 'address_space': 1048576, 'physical_memory': 536870912, 'allocated_pages': 100}
+Page Table Size: 4096 bytes
+Allocated Pages: 1024/1024
+Page Table Size: 4096 bytes
+
+Configuration: {'page_size': 1024, 'address_space': 2097152, 'physical_memory': 536870912, 'allocated_pages': 100}
+Page Table Size: 8192 bytes
+Allocated Pages: 2048/2048
+Page Table Size: 8192 bytes
+
+Configuration: {'page_size': 1024, 'address_space': 4194304, 'physical_memory': 536870912, 'allocated_pages': 100}
+Page Table Size: 16384 bytes
+Allocated Pages: 4096/4096
+Page Table Size: 16384 bytes
+
+=== Task 2: Page Allocation Experiment ===
+
+Configuration: {'page_size': 1024, 'address_space': 16384, 'physical_memory': 32768, 'allocated_pages': 0}
+Page Table Size: 64 bytes
+Allocated Pages: 0/16
+Page Table Size: 64 bytes
+
+Configuration: {'page_size': 1024, 'address_space': 16384, 'physical_memory': 32768, 'allocated_pages': 25}
+Page Table Size: 64 bytes
+Allocated Pages: 4/16
+Page Table Size: 64 bytes
+
+Configuration: {'page_size': 1024, 'address_space': 16384, 'physical_memory': 32768, 'allocated_pages': 50}
+Page Table Size: 64 bytes
+Allocated Pages: 8/16
+Page Table Size: 64 bytes
+
+Configuration: {'page_size': 1024, 'address_space': 16384, 'physical_memory': 32768, 'allocated_pages': 100}
+Page Table Size: 64 bytes
+Allocated Pages: 16/16
+Page Table Size: 64 bytes
+
+=== Task 3: Random Seed Experiment ===
+
+Configuration: {'page_size': 8, 'address_space': 32, 'physical_memory': 1024, 'allocated_pages': 100, 'random_seed': 1}
+Page Table Size: 16 bytes
+Allocated Pages: 4/4
+Page Table Size: 16 bytes
+
+Configuration: {'page_size': 8192, 'address_space': 32768, 'physical_memory': 1048576, 'allocated_pages': 100, 'random_seed': 2}
+Page Table Size: 16 bytes
+Allocated Pages: 4/4
+Page Table Size: 16 bytes
+
+Configuration: {'page_size': 1048576, 'address_space': 268435456, 'physical_memory': 536870912, 'allocated_pages': 100, 'random_seed': 3}
+Page Table Size: 1024 bytes
+Allocated Pages: 256/256
+Page Table Size: 1024 bytes
+
+```
+
+
+
+---
+
+## Requirements
+- Python 3.6 or higher
 
 ---
 
 ## License
-
-This project is licensed under the MIT License.
-
----
-
-Happy simulating! 🎉
+MIT License
